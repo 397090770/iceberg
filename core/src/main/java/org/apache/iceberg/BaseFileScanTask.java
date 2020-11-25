@@ -209,5 +209,14 @@ class BaseFileScanTask implements FileScanTask {
     public Iterable<FileScanTask> split(long splitSize) {
       throw new UnsupportedOperationException("Cannot split a task which is already split");
     }
+
+    @Override
+    public String toString() {
+      return "SplitScanTask{" +
+          "len=" + len +
+          ", offset=" + offset +
+          ", fileScanTask=" + fileScanTask +
+          '}';
+    }
   }
 }

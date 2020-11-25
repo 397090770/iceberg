@@ -206,6 +206,7 @@ public class RewriteDataFilesAction
 
     Map<StructLikeWrapper, Collection<FileScanTask>> groupedTasks = groupTasksByPartition(fileScanTasks.iterator());
     Map<StructLikeWrapper, Collection<FileScanTask>> filteredGroupedTasks = groupedTasks.entrySet().stream()
+        // .peek(kv -> System.out.println(kv.getKey() + "," + kv.getValue()))
         .filter(kv -> kv.getValue().size() > 1)
         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 

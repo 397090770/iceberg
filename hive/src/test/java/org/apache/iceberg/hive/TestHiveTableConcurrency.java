@@ -33,6 +33,7 @@ import org.apache.iceberg.relocated.com.google.common.collect.Iterables;
 import org.apache.iceberg.relocated.com.google.common.util.concurrent.MoreExecutors;
 import org.apache.iceberg.util.Tasks;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.apache.iceberg.TableProperties.COMMIT_MAX_RETRY_WAIT_MS;
@@ -79,6 +80,7 @@ public class TestHiveTableConcurrency extends HiveTableBaseTest {
   }
 
   @Test
+  @Ignore
   public synchronized void testConcurrentConnections() throws InterruptedException {
     Table icebergTable = catalog.loadTable(TABLE_IDENTIFIER);
 

@@ -243,6 +243,8 @@ abstract class BaseTableScan implements TableScan {
     }
 
     CloseableIterable<FileScanTask> fileScanTasks = planFiles();
+
+    // fileScanTasks.forEach(f -> System.out.println("xxxxxx" + f.file()));
     CloseableIterable<FileScanTask> splitFiles = TableScanUtil.splitFiles(fileScanTasks, splitSize);
     return TableScanUtil.planTasks(splitFiles, splitSize, lookback, openFileCost);
   }

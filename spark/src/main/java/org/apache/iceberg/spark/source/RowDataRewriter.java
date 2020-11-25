@@ -92,6 +92,7 @@ public class RowDataRewriter implements Serializable {
     RowDataReader dataReader = new RowDataReader(
         task, schema, schema, nameMapping, io.value(), encryptionManager.value(), caseSensitive);
 
+    // task.files().forEach(file -> System.out.println("xxx partitionId=" + partitionId + ", file=" + file));
     SparkAppenderFactory appenderFactory = new SparkAppenderFactory(
         properties, schema, SparkSchemaUtil.convert(schema));
     OutputFileFactory fileFactory = new OutputFileFactory(
@@ -104,8 +105,14 @@ public class RowDataRewriter implements Serializable {
       writer = new PartitionedWriter(spec, format, appenderFactory, fileFactory, io.value(), Long.MAX_VALUE, schema);
     }
 
+    boolean first = true;
+
     try {
       while (dataReader.next()) {
+        if (first) {
+          // task.files().forEach(file -> System.out.println("xxx partitionId=" + partitionId + ", file=" + file));
+          first = false;
+        }
         InternalRow row = dataReader.get();
         writer.write(row);
       }

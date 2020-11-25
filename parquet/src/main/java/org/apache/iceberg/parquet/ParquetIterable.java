@@ -79,6 +79,7 @@ public class ParquetIterable<T> extends CloseableGroup implements CloseableItera
       // this must be called in hasNext because it reuses an UnsafeRow
       try {
         T nextRecord = parquet.read();
+        // System.out.println("XXXXXX nextRecord=" + nextRecord);
         this.needsAdvance = false;
         this.hasNext = nextRecord != null;
         return nextRecord;
