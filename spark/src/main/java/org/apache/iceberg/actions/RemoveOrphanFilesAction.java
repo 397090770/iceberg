@@ -146,9 +146,13 @@ public class RemoveOrphanFilesAction extends BaseSparkAction<List<String>> {
   @Override
   public List<String> execute() {
     Dataset<Row> validDataFileDF = buildValidDataFileDF(spark);
+    validDataFileDF.show(100, false);
     Dataset<Row> validMetadataFileDF = buildValidMetadataFileDF(spark, table, ops);
+    validMetadataFileDF.show(100, false);
     Dataset<Row> validFileDF = validDataFileDF.union(validMetadataFileDF);
+    validFileDF.show(100, false);
     Dataset<Row> actualFileDF = buildActualFileDF();
+    actualFileDF.show(100, false);
 
     Column nameEqual = filename.apply(actualFileDF.col("file_path"))
         .equalTo(filename.apply(validFileDF.col("file_path")));
